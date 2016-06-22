@@ -3,6 +3,7 @@ package org.pim.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +26,8 @@ public class ApplicationConfig {
         bookConverter.setUnmarshaller(marshaller);
         List<HttpMessageConverter<?>> converterList = new ArrayList<HttpMessageConverter<?>>();
         converterList.add(bookConverter);
+        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+        converterList.add(jsonConverter);
         restTemplate.setMessageConverters(converterList);
         return restTemplate;
     }
